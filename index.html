@@ -1075,58 +1075,61 @@ background: url(http://akum1.fox-fox.online/tovary/images/sale-bg.png) 0 0 no-re
             </div>
             
  <div style="text-align: center; margin: 10px auto; display: block; font-size: 24px; line-height: 26px;"><strong>Залишіть заявку</strong><p>та отримайте консультацію</p></div>
- <script>
-  document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('order6').addEventListener('submit', function(e) {
-          e.preventDefault(); // Запобігаємо стандартній відправці форми
-       
-          // Отримуємо значення полів форми
-          var name = document.querySelector('input[name="name"]').value;
-          var phone = document.querySelector('input[name="phone"]').value;
-          
-       
-          // Формуємо повідомлення
-          var message = `Нове замовлення (ліжко):\nІм'я та прізвище: ${name}\nТелефон: ${phone};`
-       
-          // Ваш токен та ID чату
-          var token = '6589486228:AAEGqVpsosvlmtcJmr4gmfyV8NIueJHm8NM';
-          var chatId =  1404908930; // Замініть YOUR_CHAT_ID на ваш реальний ID чату
-       
-          // Відправляємо повідомлення через Telegram API
-          fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                  chat_id: chatId,
-                  text: message,
-                  parse_mode: "Markdown"
-              })
-          })
-          .then(response => response.json())
-          .then(data => {
-              console.log('Success:', data);
-              // Після успішної відправки, одразу перенаправляємо на сторінку "Дякую"
-              window.location.href = "https://ukrainetovar.github.io/katalogtovariv/"; 
-          })
-          .catch((error) => {
-              console.error('Error:', error);
-              alert('Помилка при відправленні замовлення.');
-          });
-      });
-  });
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('order6').addEventListener('submit', function(e) {
+            e.preventDefault(); // Запобігаємо стандартній відправці форми
+         
+            // Отримуємо значення полів форми
+            var name = document.querySelector('input[name="name"]').value;
+            var phone = document.querySelector('input[name="phone"]').value;
+            var size = document.querySelector('select[name="size"]').value;
+            
+            // Формуємо повідомлення
+            var message = `Нове замовлення (ліжко):\nІм'я та прізвище: ${name}\nТелефон: ${phone}\nРозмір: ${size}`;
+         
+            // Ваш токен та ID чату
+            var token = '6589486228:AAEGqVpsosvlmtcJmr4gmfyV8NIueJHm8NM';
+            var chatId =  1404908930; // Замініть YOUR_CHAT_ID на ваш реальний ID чату
+         
+            // Відправляємо повідомлення через Telegram API
+            fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: "Markdown"
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Після успішної відправки, одразу перенаправляємо на сторінку "Дякую"
+                window.location.href = "https://ukrainetovar.github.io/katalogtovariv/"; 
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Помилка при відправленні замовлення.');
+            });
+        });
+    });
 </script>
 
 <form id="order6" class="order_form" action="https://ukrainetovar.github.io/katalogtovariv/" method="get" name="order-form">
     <input type="hidden" name="task" value="process">
     <input type="hidden" name="country" value="ru">
     
-  
-    
-    
-    <input class="field" type="text" name="name" placeholder="Введіть Ваше ім&#39;я та прізвище">
+    <input class="field" type="text" name="name" placeholder="Введіть Ваше ім'я та прізвище">
     <input class="field" type="tel" name="phone" placeholder="Введіть Ваш телефон" required="">
+    
+    <label for="size">Оберіть розмір:</label>
+    <select id="size" name="size">
+        <option value="Односпальний(99х191х51 см) - 3799 грн.">Односпальний(99х191х51 см) - 3799 грн.</option>
+        <option value="Двоспальний(152х203х51 см) - 4699 грн.">Двоспальний(152х203х51 см) - 4699 грн.</option>
+    </select>
     
     <button class="button">Замовити зараз</button>
     
